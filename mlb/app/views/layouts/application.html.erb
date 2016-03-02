@@ -8,6 +8,18 @@
 </head>
 <body>
 
+<div>
+  <h1>Players</h1>
+
+    <%= form_tag(players_path, :method => "GET", id: "age-form") do %>
+      <%= text_field_tag :age, params[:age], placeholder: "Age", id: "age" %>
+      <%= text_field_tag :search1, params[:search1], placeholder: "Search Players", id: "player1" %>
+      <%= text_field_tag :search2, params[:search2], placeholder: "Search Players", id: "player2" %>
+    <%= submit_tag "Search", :name => nil, id: "submit" %>
+  <% end %>
+
+</div>
+<%=  render partial: "player", collection: @player1 %>
 <%= yield %>
 
 </body>

@@ -2,34 +2,32 @@ require 'pry'
 class PlayersController < ApplicationController
 
   def index
-
-    # if params[:age]
+    if params[:age]
       @age = Player.search(params[:age])
-    # else
-      # @age = Player.first
+      @player1 = Player.search(params[:search1])
+      @player2 = Player.search(params[:search2])
 
-    # if params[:search1]
-      @players = Player.search(params[:search1])
-    # else
-      # @players = Player.first
-    # end
-
-    # if params[:search2]
-      @player_two = Player.search(params[:search2])
-    # else
-      # @player_two = Player.last
-    # end
-   # end
+    else
+      @age = "25"
+      @player1 = Player.last
+      @player2 = Player.first
+    end
+# Binding.pry
   end
 
-  # def comparePlayers
-  #   @cost_data = (params[:search1], params[:search2])
-  #   if @players.blank?
-  #     render :text => "record_not_found"
-  #   else
-  #     render @players
-  #   end
-  # end
+  def playerByAge
+     @agePlayer1 = Player.find_by(name: params[:search1], age: params[:age])
+     @agePlayer2 = Player.find_by(name: params[:search2], age: params[:age])
+     #found here: http://stackoverflow.com/questions/3936621/rails-find-by-with-2-fields
+     Binding.pry
+  end
+
+  def show
+    @age = Player.find(params[:age])
+    @player1 = Player.find(params[:search1])
+    @player2 = Player.find(params[:search2])
+    # redirect_to "/players"
+  end
 
   def update
     respond_to do |format|

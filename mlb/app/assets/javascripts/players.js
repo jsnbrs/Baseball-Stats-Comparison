@@ -8,9 +8,11 @@ $(document).ready(function(){
     console.log('click noticed.')
 // debugger
     event.preventDefault();
+
     var age = $("#age").val();
     var player1 = $("#player1").val();
     var player2 = $("#player2").val();
+
     $.ajax({
       url: '/players?utf8=%E2%9C%93&age=' + age +'&search1=' + player1 + '&search2=' + player2,
       type: 'get',
