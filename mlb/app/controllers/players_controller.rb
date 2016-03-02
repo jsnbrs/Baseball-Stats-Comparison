@@ -7,6 +7,9 @@ class PlayersController < ApplicationController
       @player1 = Player.search(params[:search1])
       @player2 = Player.search(params[:search2])
 
+      # @play1 = Player.where(' name LIKE ?', 'params[:search1]')
+      # @play2 = Player.where(' name LIKE ?', 'params[:search2]')
+Binding.pry
     else
       @age = "25"
       @player1 = Player.last
@@ -16,8 +19,8 @@ class PlayersController < ApplicationController
   end
 
   def playerByAge
-     @agePlayer1 = Player.find_by(name: params[:search1], age: params[:age])
-     @agePlayer2 = Player.find_by(name: params[:search2], age: params[:age])
+     # @agePlayer1 = Player.find_by(name: params[:search1], age: params[:age])
+     # @agePlayer2 = Player.find_by(name: params[:search2], age: params[:age])
      #found here: http://stackoverflow.com/questions/3936621/rails-find-by-with-2-fields
      Binding.pry
   end
@@ -26,6 +29,8 @@ class PlayersController < ApplicationController
     @age = Player.find(params[:age])
     @player1 = Player.find(params[:search1])
     @player2 = Player.find(params[:search2])
+    @agePlayer1 = Player.find_by(name: params[:search1], age: params[:age])
+    @agePlayer2 = Player.find_by(name: params[:search2], age: params[:age])
     # redirect_to "/players"
   end
 
