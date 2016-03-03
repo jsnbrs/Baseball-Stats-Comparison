@@ -8,21 +8,37 @@
 </head>
 <body>
 
-<div id="search">
-  <h1>Player Comparison</h1>
+<div class="container-fluid">
+  <div class="form-group" id="search">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4"><h1>Player Comparison</h1></div>
+      <div class="col-md-4"></div>
+    </div>
 
-    <%= form_tag(players_path, :method => "GET", id: "form") do %>
-      <%= text_field_tag :age, params[:age], placeholder: "Age", id: "age" %>
-      <%= text_field_tag :search1, params[:search1], placeholder: "Player 1", id: "player1" %>
-      <%= text_field_tag :search2, params[:search2], placeholder: "Player 2", id: "player2" %>
-    <%= submit_tag "Search", :name => nil, id: "submit" %>
 
-  <% end %>
+      <%= form_tag(players_path, :method => "GET", id: "form") do %>
+        <div class="buttons"><%= text_field_tag :age, params[:age], placeholder: "Age", id: "age" %>
+        <%= text_field_tag :search1, params[:search1], placeholder: "Player 1", id: "player1" %>
+        <%= text_field_tag :search2, params[:search2], placeholder: "Player 2", id: "player2" %></div>
 
+
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4" id="searchbutton"><button class="btn btn-primary" type="submit">SEARCH</button></div>
+    <div class="col-md-4"></div>
+  </div>
+      <% submit_tag "Search", :name => nil, id: "submit" %>
+
+
+
+    <% end %>
+
+  </div>
 </div>
 
 <div class="container-fluid">
-  <div class="row">
+  <div class="row1">
     <div class="col-md-1" id="pa1"></div>
     <div class="col-md-1" id="avg1"></div>
     <div class="col-md-1" id="r1"></div>
@@ -39,7 +55,7 @@
 </div>
 
 <div class="container-fluid">
-  <div class="row">
+  <div class="row2">
     <div class="col-md-1" data-toggle="tooltip" data-placement="right" title="PLATE APPEARANCES">PA</div>
     <div class="col-md-1" data-toggle="tooltip" title="AVERAGE">AVG</div>
     <div class="col-md-1" data-toggle="tooltip" title="RUNS">R</div>
@@ -56,7 +72,7 @@
 </div>
 
 <div class="container-fluid">
-  <div class="row">
+  <div class="row3">
     <div class="col-md-1" id="pa2"></div>
     <div class="col-md-1" id="avg2"></div>
     <div class="col-md-1" id="r2"></div>

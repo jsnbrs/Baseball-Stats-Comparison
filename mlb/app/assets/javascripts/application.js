@@ -38,7 +38,7 @@ $(function(){
     url: "/players/" + age +"/" + player1 + "/" + player2,
     dataType: "JSON",
       success: function(data){
-        // var div = document.getElementById('.divID');
+
         var player_1_div1 = $(`
           <div>${data[0].pa}</div>
           `).appendTo( '#pa1' );
@@ -75,7 +75,6 @@ $(function(){
         var player_1_div12 = $(`
           <div>${data[0].iso}</div>
           `).appendTo( '#iso1' );
-        // player_1_div.appendTo(div)
 
         var player_2_div1 = $(`
           <div>${data[1].pa}</div>
@@ -114,7 +113,7 @@ $(function(){
           <div>${data[1].iso}</div>
           `).appendTo( '#iso2' );
 
-        // player_2_div.appendTo('body')
+
         // Once this is the data you want, play with data, append data to DOM
 
 
