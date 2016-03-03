@@ -2,45 +2,52 @@ require 'pry'
 class PlayersController < ApplicationController
 
   def index
-    if params[:age]
-      @age = Player.search(params[:age])
-      @player1 = Player.search(params[:search1])
-      @player2 = Player.search(params[:search2])
+    params[:age] = 28, params[:search1] = "Babe Ruth", params[:search2] = "Ted Williams" if params[:age].blank?
+    @age = Player.search(params[:age])
+    @player1 = Player.search(params[:search1]).limit(2)
+    @player2 = Player.search(params[:search2]).limit(2)
+    @agePlayer1 = Player.find_by(name: params[:search1], age: params[:age])
+    @agePlayer2 = Player.find_by(name: params[:search2], age: params[:age])
+    # binding.pry
+    # @play1 = Player.where(' name LIKE ?', 'params[:search1]')
+    # @play2 = Player.where(' name LIKE ?', 'params[:search2]')
 
-      # @play1 = Player.where(' name LIKE ?', 'params[:search1]')
-      # @play2 = Player.where(' name LIKE ?', 'params[:search2]')
-Binding.pry
-    else
-      @age = "25"
-      @player1 = Player.last
-      @player2 = Player.first
-    end
-# Binding.pry
+
   end
 
-  def playerByAge
+  # def playerByAge
      # @agePlayer1 = Player.find_by(name: params[:search1], age: params[:age])
      # @agePlayer2 = Player.find_by(name: params[:search2], age: params[:age])
      #found here: http://stackoverflow.com/questions/3936621/rails-find-by-with-2-fields
-     Binding.pry
-  end
+
+  # end
 
   def show
     @age = Player.find(params[:age])
     @player1 = Player.find(params[:search1])
     @player2 = Player.find(params[:search2])
-    @agePlayer1 = Player.find_by(name: params[:search1], age: params[:age])
-    @agePlayer2 = Player.find_by(name: params[:search2], age: params[:age])
+
     # redirect_to "/players"
   end
 
-  def update
-    respond_to do |format|
-      if @players.update(players_params)
-      format.html { redirect_to players_path }
-      format.js
-      format.json { render json: @player }
-    end
-    end
-  end
+  def ajax
+    binding.pry
+    # response = { :age => @age, :player1 => @player1, :player2 => @player2 }
+    # this is for format.json not working yet
+    # Search DB with params[:age], params[:player1], params[:player2]
+    # Player.where(name= params, age = params)
+    # Structure all player data into one object called response
+    # response = {Mookie Betts: {hr: , hits, }, Ted Williams: {}}
+    # render json: response
+
+
+    #@players = Player.all(:order => 'position')
+    player1 = Player.find_by({ age: params['age'], name: params['player1'] })
+    player1.age = player1.age.to_i
+    player2 = Player.find_by({ age: params['age'], name: params['player2'] })
+    player2.age = player2.age.to_i
+    render :json => [ player1, player2 ]
+end
+
+
 end
