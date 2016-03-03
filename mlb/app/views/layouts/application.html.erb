@@ -8,23 +8,74 @@
 </head>
 <body>
 
-<div>
-  <h1>Players</h1>
+<div id="search">
+  <h1>Player Comparison</h1>
 
     <%= form_tag(players_path, :method => "GET", id: "form") do %>
       <%= text_field_tag :age, params[:age], placeholder: "Age", id: "age" %>
-      <%= text_field_tag :search1, params[:search1], placeholder: "Search Player 1", id: "player1" %>
-      <%= text_field_tag :search2, params[:search2], placeholder: "Search Player 2", id: "player2" %>
+      <%= text_field_tag :search1, params[:search1], placeholder: "Player 1", id: "player1" %>
+      <%= text_field_tag :search2, params[:search2], placeholder: "Player 2", id: "player2" %>
     <%= submit_tag "Search", :name => nil, id: "submit" %>
 
   <% end %>
 
 </div>
 
-<%  render partial: "player1", collection: @player1 %>
-<%  render partial: "player2", collection: @player2 %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-1" id="pa1"></div>
+    <div class="col-md-1" id="avg1"></div>
+    <div class="col-md-1" id="r1"></div>
+    <div class="col-md-1" id="hr1"></div>
+    <div class="col-md-1" id="bb1"></div>
+    <div class="col-md-1" id="so1"></div>
+    <div class="col-md-1" id="rbi1"></div>
+    <div class="col-md-1" id="sb1"></div>
+    <div class="col-md-1" id="obp1"></div>
+    <div class="col-md-1" id="slg1"></div>
+    <div class="col-md-1" id="ops1"></div>
+    <div class="col-md-1" id="iso1"></div>
+  </div>
+</div>
 
-<%= yield %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-1" data-toggle="tooltip" data-placement="right" title="PLATE APPEARANCES">PA</div>
+    <div class="col-md-1" data-toggle="tooltip" title="AVERAGE">AVG</div>
+    <div class="col-md-1" data-toggle="tooltip" title="RUNS">R</div>
+    <div class="col-md-1" data-toggle="tooltip" title="HOME RUNS">HR</div>
+    <div class="col-md-1" data-toggle="tooltip" title="WALKS">BB</div>
+    <div class="col-md-1" data-toggle="tooltip" title="STRIKE OUTS">SO</div>
+    <div class="col-md-1" data-toggle="tooltip" title="RUNS BATTED IN">RBI</div>
+    <div class="col-md-1" data-toggle="tooltip" title="STOLEN BASES">SB</div>
+    <div class="col-md-1" data-toggle="tooltip" title="ON BASE PERCENTAGE">OBP</div>
+    <div class="col-md-1" data-toggle="tooltip" title="SLUGGING">SLG</div>
+    <div class="col-md-1" data-toggle="tooltip" title="ON-BASE PLUS SLUGGIN">OPS</div>
+    <div class="col-md-1" data-toggle="tooltip" data-placement="left" title="ISOLATED POWER">ISO</div>
+  </div>
+</div>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-1" id="pa2"></div>
+    <div class="col-md-1" id="avg2"></div>
+    <div class="col-md-1" id="r2"></div>
+    <div class="col-md-1" id="hr2"></div>
+    <div class="col-md-1" id="bb2"></div>
+    <div class="col-md-1" id="so2"></div>
+    <div class="col-md-1" id="rbi2"></div>
+    <div class="col-md-1" id="sb2"></div>
+    <div class="col-md-1" id="obp2"></div>
+    <div class="col-md-1" id="slg2"></div>
+    <div class="col-md-1" id="ops2"></div>
+    <div class="col-md-1" id="iso2"></div>
+  </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
 </body>
 </html>
