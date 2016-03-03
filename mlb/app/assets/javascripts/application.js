@@ -15,11 +15,54 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require Chart
 //= require_tree .
 
 "use strict";
 
 $(function(){
+
+  function makeChart(firstPlayer, secondPlayer){
+      var radarChartData = {
+    labels: ["HOME RUNS", "WALKS", "RUNS", "STRIKE OUTS", "RBI"],
+    datasets: [
+      {
+        label: "Player One",
+        fillColor: "rgba(220,220,220,0.2)",
+        strokeColor: "rgba(220,220,220,1)",
+        pointColor: "rgba(220,220,220,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(220,220,220,1)",
+        data: [ firstPlayer.hr,
+                firstPlayer.bb,
+                firstPlayer.r,
+                firstPlayer.so,
+                firstPlayer.rbi ]
+      },
+      {
+        label: "Player Two",
+        fillColor: "rgba(151,187,205,0.2)",
+        strokeColor: "rgba(151,187,205,1)",
+        pointColor: "rgba(151,187,205,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(151,187,205,1)",
+        data: [ secondPlayer.hr,
+                secondPlayer.bb,
+                secondPlayer.r,
+                secondPlayer.so,
+                secondPlayer.rbi ]
+      }
+    ]}
+
+      window.myRadar = new Chart(document.getElementById("canvas").getContext("2d")).Radar(radarChartData, {
+      responsive: true
+      });
+
+  } // makeChart
+
+
   console.log('players.js loaded.')
   $('form').click(function(event){
     // Issue here with form need to figure out click on button, not click on box
@@ -116,6 +159,7 @@ $(function(){
 
 
         // Once this is the data you want, play with data, append data to DOM
+        makeChart(data[0], data[1]);
 
 
         document.getElementById("form").reset();

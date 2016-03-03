@@ -4,8 +4,8 @@ class PlayersController < ApplicationController
   def index
     # params[:age] = 28, params[:search1] = "Babe Ruth", params[:search2] = "Ted Williams" if params[:age].blank?
     # @age = Player.search(params[:age])
-    # @player1 = Player.search(params[:search1]).limit(2)
-    # @player2 = Player.search(params[:search2]).limit(2)
+    @player1 = Player.search(params[:search1])
+    @player2 = Player.search(params[:search2])
     # @agePlayer1 = Player.find_by(name: params[:search1], age: params[:age])
     # @agePlayer2 = Player.find_by(name: params[:search2], age: params[:age])
      #found here: http://stackoverflow.com/questions/3936621/rails-find-by-with-2-fields

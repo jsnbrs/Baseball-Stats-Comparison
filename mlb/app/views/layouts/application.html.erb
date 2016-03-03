@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Mlb</title>
+  <title>MLB COMP</title>
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -16,26 +17,28 @@
       <div class="col-md-4"></div>
     </div>
 
-
       <%= form_tag(players_path, :method => "GET", id: "form") do %>
-        <div class="buttons"><%= text_field_tag :age, params[:age], placeholder: "Age", id: "age" %>
-        <%= text_field_tag :search1, params[:search1], placeholder: "Player 1", id: "player1" %>
-        <%= text_field_tag :search2, params[:search2], placeholder: "Player 2", id: "player2" %></div>
+
+        <div class="buttons">
+          <%= text_field_tag :age, params[:age], placeholder: "Age", id: "age" %>
+          <%= text_field_tag :search1, params[:search1], placeholder: "Player 1", id: "player1" %>
+          <%= text_field_tag :search2, params[:search2], placeholder: "Player 2", id: "player2" %>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4" id="searchbutton"><button class="btn btn-primary" type="submit">SEARCH</button></div>
+          <div class="col-md-4"></div>
+        </div>   <!-- new bootstrap button -->
+
+      <% submit_tag "Search", :name => nil, id: "submit" %> <!-- submit - invisible -->
+
+    <% end %>  <!-- form_tag -->
+
+  </div> <!-- form-group -->
+</div><!--  container -->
 
 
-  <div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4" id="searchbutton"><button class="btn btn-primary" type="submit">SEARCH</button></div>
-    <div class="col-md-4"></div>
-  </div>
-      <% submit_tag "Search", :name => nil, id: "submit" %>
-
-
-
-    <% end %>
-
-  </div>
-</div>
 
 <div class="container-fluid">
   <div class="row1">
@@ -56,18 +59,18 @@
 
 <div class="container-fluid">
   <div class="row2">
-    <div class="col-md-1" data-toggle="tooltip" data-placement="right" title="PLATE APPEARANCES">PA</div>
-    <div class="col-md-1" data-toggle="tooltip" title="AVERAGE">AVG</div>
-    <div class="col-md-1" data-toggle="tooltip" title="RUNS">R</div>
-    <div class="col-md-1" data-toggle="tooltip" title="HOME RUNS">HR</div>
-    <div class="col-md-1" data-toggle="tooltip" title="WALKS">BB</div>
-    <div class="col-md-1" data-toggle="tooltip" title="STRIKE OUTS">SO</div>
-    <div class="col-md-1" data-toggle="tooltip" title="RUNS BATTED IN">RBI</div>
-    <div class="col-md-1" data-toggle="tooltip" title="STOLEN BASES">SB</div>
-    <div class="col-md-1" data-toggle="tooltip" title="ON BASE PERCENTAGE">OBP</div>
-    <div class="col-md-1" data-toggle="tooltip" title="SLUGGING">SLG</div>
-    <div class="col-md-1" data-toggle="tooltip" title="ON-BASE PLUS SLUGGIN">OPS</div>
-    <div class="col-md-1" data-toggle="tooltip" data-placement="left" title="ISOLATED POWER">ISO</div>
+    <div class="col-md-1" data-toggle="tooltip" data-placement="right" title="PLATE APPEARANCES"><h3>PA</h3></div>
+    <div class="col-md-1" data-toggle="tooltip" title="AVERAGE"><h3>AVG</h3></div>
+    <div class="col-md-1" data-toggle="tooltip" title="RUNS"><h3>R</h3></div>
+    <div class="col-md-1" data-toggle="tooltip" title="HOME RUNS"><h3>HR</h3></div>
+    <div class="col-md-1" data-toggle="tooltip" title="WALKS"><h3>BB</h3></div>
+    <div class="col-md-1" data-toggle="tooltip" title="STRIKE OUTS"><h3>SO</h3></div>
+    <div class="col-md-1" data-toggle="tooltip" title="RUNS BATTED IN"><h3>RBI</h3></div>
+    <div class="col-md-1" data-toggle="tooltip" title="STOLEN BASES"><h3>SB</h3></div>
+    <div class="col-md-1" data-toggle="tooltip" title="ON BASE PERCENTAGE"><h3>OBP</h3></div>
+    <div class="col-md-1" data-toggle="tooltip" title="SLUGGING"><h3>SLG</h3></div>
+    <div class="col-md-1" data-toggle="tooltip" title="ON-BASE PLUS SLUGGING"><h3>OPS</h3></div>
+    <div class="col-md-1" data-toggle="tooltip" data-placement="left" title="ISOLATED POWER"><h3>ISO</h3></div>
   </div>
 </div>
 
@@ -88,10 +91,59 @@
   </div>
 </div>
 
+<!-- bootstrap function for tooltip -->
 <script type="text/javascript">
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();
 });
 </script>
+<!-- end bootstrap tooltip -->
+
+<!-- charts start here -->
+  <div style="width:30%">
+    <canvas id="canvas" height="450" width="450"></canvas>
+  </div>
+
+
+  <script>
+  var radarChartData = {
+    labels: ["PLATE APPEARANCES", "AVG", "HOME RUNS", "WALKS", "RUNS", "STRIKE OUTS", "RBI"],
+    datasets: [
+      {
+        label: "My First dataset",
+        fillColor: "rgba(220,220,220,0.2)",
+        strokeColor: "rgba(220,220,220,1)",
+        pointColor: "rgba(220,220,220,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(220,220,220,1)",
+        data: [65,59,90,81,56,55,40]
+      },
+      {
+        label: "My Second dataset",
+        fillColor: "rgba(151,187,205,0.2)",
+        strokeColor: "rgba(151,187,205,1)",
+        pointColor: "rgba(151,187,205,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(151,187,205,1)",
+        data: [28,48,40,19,96,27,100]
+      }
+    ]
+  };
+
+  $('form').click(function(){
+ var txt = $('#pa2').text();
+alert(txt);
+    window.myRadar = new Chart(document.getElementById("canvas").getContext("2d")).Radar(radarChartData, {
+      responsive: true
+    });
+  })
+  </script>
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"> </script>
 </body>
 </html>
