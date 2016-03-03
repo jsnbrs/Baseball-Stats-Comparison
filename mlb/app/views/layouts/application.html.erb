@@ -13,8 +13,8 @@
 
     <%= form_tag(players_path, :method => "GET", id: "form") do %>
       <%= text_field_tag :age, params[:age], placeholder: "Age", id: "age" %>
-      <%= text_field_tag :search1, params[:search1], placeholder: "Search Players", id: "player1" %>
-      <%= text_field_tag :search2, params[:search2], placeholder: "Search Players", id: "player2" %>
+      <%= text_field_tag :search1, params[:search1], placeholder: "Search Player 1", id: "player1" %>
+      <%= text_field_tag :search2, params[:search2], placeholder: "Search Player 2", id: "player2" %>
     <%= submit_tag "Search", :name => nil, id: "submit" %>
 
   <% end %>

@@ -11,16 +11,18 @@
 // about supported directives.
 //
 //= require jquery
+//= require tether
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
 //= require bootstrap-sprockets
+//= require_tree .
 
 "use strict";
 
 $(function(){
   console.log('players.js loaded.')
   $('form').click(function(event){
+    // Issue here with form need to figure out click on button, not click on box
 
     console.log('click noticed.')
     event.preventDefault();
@@ -36,8 +38,22 @@ $(function(){
     url: "/players/" + age +"/" + player1 + "/" + player2,
     dataType: "JSON",
       success: function(data){
-        console.log(data);
+        var player_1_div = $(`
+          <div>
+            ${data[0].avg}
+          </div>
+          `)
+
+        player_1_div.appendTo('body')
+        var player_2_div = $(`
+          <div>
+            ${data[1].avg}
+          </div>
+          `)
+
+        player_2_div.appendTo('body')
         // Once this is the data you want, play with data, append data to DOM
+        document.getElementById("form").reset();
         },
       error: function(data){
         console.log('error with the data...');
@@ -46,10 +62,3 @@ $(function(){
 
   });
 });
-      // var player_1_div = $(`
-      //     <div>
-      //       ${data[0].player_id}
-      //     </div>
-      //     `)
-
-      //   player_1_div.appendTo('body')
