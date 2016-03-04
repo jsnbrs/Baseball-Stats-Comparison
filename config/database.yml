@@ -24,7 +24,7 @@ default: &default
 development:
   <<: *default
   database: mlb_development
-    adapter: postgresql
+  adapter: postgresql
   host: localhost
   username: jason
 
