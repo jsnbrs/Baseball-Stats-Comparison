@@ -26,7 +26,7 @@ development:
   database: mlb_development
   adapter: postgresql
   host: localhost
-  username: jason
+  username: root
 
 
   # The specified database role being used to connect to postgres.
