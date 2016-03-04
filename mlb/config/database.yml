@@ -24,6 +24,10 @@ default: &default
 development:
   <<: *default
   database: mlb_development
+  adapter: postgresql
+  host: localhost
+  username: root
+
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.

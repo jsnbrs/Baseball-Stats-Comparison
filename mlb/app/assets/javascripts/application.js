@@ -27,7 +27,7 @@ $(function(){
     labels: ["HOME RUNS", "WALKS", "RUNS", "STRIKE OUTS", "RBI"],
     datasets: [
       {
-        label: "Player One",
+        label: firstPlayer.name,
         fillColor: "rgba(220,220,220,0.2)",
         strokeColor: "rgba(220,220,220,1)",
         pointColor: "rgba(220,220,220,1)",
@@ -41,7 +41,7 @@ $(function(){
                 firstPlayer.rbi ]
       },
       {
-        label: "Player Two",
+        label: secondPlayer.name,
         fillColor: "rgba(151,187,205,0.2)",
         strokeColor: "rgba(151,187,205,1)",
         pointColor: "rgba(151,187,205,1)",
@@ -62,16 +62,58 @@ $(function(){
 
   } // makeChart
 
-//
+  function makeChart2(firstPlayer, secondPlayer){
+    var polarData = [
+        {
+          value: firstPlayer.r,
+          color:"#F7464A",
+          highlight: "#FF5A5E",
+          label: firstPlayer.name +": Runs"
+        },
+        {
+          value: secondPlayer.r,
+          color: "#46BFBD",
+          highlight: "#5AD3D1",
+          label: secondPlayer.name + ": Runs"
+        },
+        {
+          value: firstPlayer.hr,
+          color: "#FDB45C",
+          highlight: "#FFC870",
+          label: firstPlayer.name + ": Home Runs"
+        },
+        {
+          value: secondPlayer.hr,
+          color: "#949FB1",
+          highlight: "#A8B3C5",
+          label: secondPlayer.name + ": Home Runs"
+        },
+        {
+          value: firstPlayer.bb,
+          color: "#4D5360",
+          highlight: "#616774",
+          label: firstPlayer.name + ": Walks"
+        },
+        {
+          value: secondPlayer.bb,
+          color: "#FFCCCC",
+          highlight: "#FF33CC",
+          label: secondPlayer.name +": Walks"
+        }
+      ];
 
-//
+        window.myPolarArea = new Chart(document.getElementById("chart-area").getContext("2d")).PolarArea(polarData, {
+          responsive:true
+        });
 
-function makeChart2(firstPlayer, secondPlayer){
+    }
+//
+function makeChart3(firstPlayer, secondPlayer){
       var radarChartData = {
     labels: ["AVERAGE", "OBP", "SLUGGING", "BASE + SLUGGING", "POWER"],
     datasets: [
       {
-        label: "Player One",
+        label: firstPlayer.name,
         fillColor: "rgba(220,220,220,0.2)",
         strokeColor: "rgba(220,220,220,1)",
         pointColor: "rgba(220,220,220,1)",
@@ -85,7 +127,7 @@ function makeChart2(firstPlayer, secondPlayer){
                 firstPlayer.iso ]
       },
       {
-        label: "Player Two",
+        label: secondPlayer.name,
         fillColor: "rgba(151,187,205,0.2)",
         strokeColor: "rgba(151,187,205,1)",
         pointColor: "rgba(151,187,205,1)",
@@ -107,9 +149,9 @@ function makeChart2(firstPlayer, secondPlayer){
   } // makeChart2
 
 
-function makeChart3(firstPlayer, secondPlayer){
+function makeChart4(firstPlayer, secondPlayer){
   var barChartData = {
-    labels : ["Games Played", "At Bat", "Single", "Double", "Triple", "Stolen Base", "Hit By Pitch"],
+    labels : ["Games Played", "Single", "Double", "Triple", "Stolen Base", "Hit By Pitch"],
 
     datasets : [
       {
@@ -118,7 +160,6 @@ function makeChart3(firstPlayer, secondPlayer){
         highlightFill: "rgba(220,220,220,0.75)",
         highlightStroke: "rgba(220,220,220,1)",
         data : [ firstPlayer.g,
-                firstPlayer.ab,
                 firstPlayer.single,
                 firstPlayer.double,
                 firstPlayer.triple,
@@ -131,7 +172,6 @@ function makeChart3(firstPlayer, secondPlayer){
         highlightFill : "rgba(151,187,205,0.75)",
         highlightStroke : "rgba(151,187,205,1)",
         data : [ secondPlayer.g,
-                secondPlayer.ab,
                 secondPlayer.single,
                 secondPlayer.double,
                 secondPlayer.triple,
@@ -159,6 +199,10 @@ function makeChart3(firstPlayer, secondPlayer){
     var player2 = $('#player2').val();
 
     // Conditional that age, player1, player 2 exist, ajax in conditional
+    if (age === '' || player1 === '' || player2 === '') {
+      $('#myModal').modal('show');
+    } else {
+
     $.ajax({
     method: "get",
     url: "/players/" + age +"/" + player1 + "/" + player2,
@@ -167,7 +211,7 @@ function makeChart3(firstPlayer, secondPlayer){
         $('.json').empty();
         console.log(data)
         var player_1_div1 = $(`
-          <div class="json">${data[0].name}</div>
+          <div class="json">${data[0].name.split(' ').slice(-1).join(' ')}</div>
           `).appendTo( '#name1' );
         var player_1_div2 = $(`
           <div class="json">${data[0].hr}</div>
@@ -204,7 +248,7 @@ function makeChart3(firstPlayer, secondPlayer){
           `).appendTo( '#iso1' );
 
         var player_2_div1 = $(`
-          <div class="json">${data[1].name}</div>
+          <div class="json">${data[1].name.split(' ').slice(-1).join(' ')}</div>
           `).appendTo( '#name2' );
         var player_2_div2 = $(`
           <div class="json">${data[1].hr}</div>
@@ -245,13 +289,18 @@ function makeChart3(firstPlayer, secondPlayer){
         makeChart(data[0], data[1]);
         makeChart2(data[0], data[1]);
         makeChart3(data[0], data[1]);
+        makeChart4(data[0], data[1]);
 
         document.getElementById("form").reset();
+
+
         },
       error: function(data){
         console.log('error with the data...');
         },
     });
+
+};//ifelse
 
   });
 });
