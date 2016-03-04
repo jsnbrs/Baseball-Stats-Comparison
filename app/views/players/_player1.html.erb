@@ -1,0 +1,105 @@
+   <%= submit_tag "Search", :name => nil, id: "submit" %>
+p1
+<%= @player1.to_a %>
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+<br>
+<span><h4>
+  Name
+  PA
+  R
+  H
+  HR
+  BB
+  SO
+  RBI
+  AVG
+  OBP
+  SLG
+  OPS
+  ISO
+</span>
+<br>
+
+<span>
+  <%= @agePlayer1[:name]%>
+  <%= @agePlayer1[:pa]%>
+  <%= @agePlayer1[:r]%>
+  <%= @agePlayer1[:h]%>
+  <%= @agePlayer1[:hr]%>
+  <%= @agePlayer1[:bb]%>
+  <%= @agePlayer1[:so]%>
+  <%= @agePlayer1[:rbi]%>
+  <%= @agePlayer1[:avg]%>
+  <%= @agePlayer1[:obp]%>
+  <%= @agePlayer1[:slg]%>
+  <%= @agePlayer1[:ops]%>
+  <%= @agePlayer1[:iso]%>
+</span><br>
+
+<span>
+  <%= @agePlayer2[:name]%>
+  <%= @agePlayer2[:pa]%>
+  <%= @agePlayer2[:r]%>
+  <%= @agePlayer2[:h]%>
+  <%= @agePlayer2[:hr]%>
+  <%= @agePlayer2[:bb]%>
+  <%= @agePlayer2[:so]%>
+  <%= @agePlayer2[:rbi]%>
+  <%= @agePlayer2[:avg]%>
+  <%= @agePlayer2[:obp]%>
+  <%= @agePlayer2[:slg]%>
+  <%= @agePlayer2[:ops]%>
+  <%= @agePlayer2[:iso]%>
+</span>
+</h4>
+
+   <div style="width:30%">
+      <canvas id="canvas" height="450" width="450"></canvas>
+    </div>
+<script>
+    $('form').click(function(){
+        var pa2 = document.getElementById('pa2');
+        var avg2 = document.getElementById('avg2');
+        var hr2 = document.getElementById('hr2');
+        var bb2 = document.getElementById('bb2');
+        var r2 = document.getElementById('r2');
+        var so2 = document.getElementById('so2');
+        var rbi2 = document.getElementById('rbi2');
+    });
+
+  // radar chart
+
+
+
+  var radarChartData = {
+    labels: ["PLATE APPEARANCES", "AVG", "HOME RUNS", "WALKS", "RUNS", "STRIKE OUTS", "RBI"],
+    datasets: [
+      {
+        label: "My First dataset",
+        fillColor: "rgba(220,220,220,0.2)",
+        strokeColor: "rgba(220,220,220,1)",
+        pointColor: "rgba(220,220,220,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(220,220,220,1)",
+        data: [pa2.value, avg2.value, hr2.value, bb2.value, r2.value, so2.value, rbi2.value]
+      },
+      {
+        label: "My Second dataset",
+        fillColor: "rgba(151,187,205,0.2)",
+        strokeColor: "rgba(151,187,205,1)",
+        pointColor: "rgba(151,187,205,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(151,187,205,1)",
+        data: [28,48,40,19,96,27,100]
+      }
+    ]
+  };
+
+  $('form').click(function(){
+    window.myRadar = new Chart(document.getElementById("canvas").getContext("2d")).Radar(radarChartData, {
+      responsive: true
+    });
+  })
+  </script>

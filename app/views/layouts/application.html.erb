@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MLB COMP</title>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="form-group" id="search">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4"><h1>Player Comparison</h1></div>
+      <div class="col-md-4"></div>
+    </div>
+
+      <%= form_tag(players_path, :method => "GET", id: "form") do %>
+
+        <div class="buttons">
+          <%= text_field_tag :age, params[:age], placeholder: "Age", id: "age" %>
+          <%= text_field_tag :search1, params[:search1], placeholder: "Player 1", id: "player1" %>
+          <%= text_field_tag :search2, params[:search2], placeholder: "Player 2", id: "player2" %>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4" ><button id="searchbutton" class="btn btn-primary" type="submit">SEARCH</button></div>
+          <div class="col-md-4"></div>
+        </div>   <!-- new bootstrap button -->
+
+      <% submit_tag "Search", :name => nil, id: "submit" %> <!-- submit - invisible -->
+
+    <% end %>  <!-- form_tag -->
+
+  </div> <!-- form-group -->
+</div><!--  container -->
+
+
+
+<div class="container-fluid">
+  <div class="row1">
+    <div class="col-md-1" id="name1"></div>
+    <div class="col-md-1" id="hr1"></div>
+    <div class="col-md-1" id="avg1"></div>
+    <div class="col-md-1" id="r1"></div>
+    <div class="col-md-1" id="bb1"></div>
+    <div class="col-md-1" id="so1"></div>
+    <div class="col-md-1" id="rbi1"></div>
+    <div class="col-md-1" id="sb1"></div>
+    <div class="col-md-1" id="obp1"></div>
+    <div class="col-md-1" id="slg1"></div>
+    <div class="col-md-1" id="ops1"></div>
+    <div class="col-md-1" id="iso1"></div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row2">
+    <div class="col-md-1" data-toggle="tooltip" data-placement="right" title="NAME"><h3>NAME</h3></div>
+    <div class="col-md-1" data-toggle="tooltip" title="HOME RUNS"><h3>HR</h3></div>
+    <div class="col-md-1" data-toggle="tooltip" title="AVERAGE"><h3>AVG</h3></div>
+    <div class="col-md-1" data-toggle="tooltip" title="RUNS"><h3>R</h3></div>
+    <div class="col-md-1" data-toggle="tooltip" title="WALKS"><h3>BB</h3></div>
+    <div class="col-md-1" data-toggle="tooltip" title="STRIKE OUTS"><h3>SO</h3></div>
+    <div class="col-md-1" data-toggle="tooltip" title="RUNS BATTED IN"><h3>RBI</h3></div>
+    <div class="col-md-1" data-toggle="tooltip" title="STOLEN BASES"><h3>SB</h3></div>
+    <div class="col-md-1" data-toggle="tooltip" title="ON BASE PERCENTAGE"><h3>OBP</h3></div>
+    <div class="col-md-1" data-toggle="tooltip" title="SLUGGING"><h3>SLG</h3></div>
+    <div class="col-md-1" data-toggle="tooltip" title="ON-BASE PLUS SLUGGING"><h3>OPS</h3></div>
+    <div class="col-md-1" data-toggle="tooltip" data-placement="left" title="ISOLATED POWER"><h3>ISO</h3></div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row3">
+    <div class="col-md-1" id="name2"></div>
+    <div class="col-md-1" id="hr2"></div>
+    <div class="col-md-1" id="avg2"></div>
+    <div class="col-md-1" id="r2"></div>
+    <div class="col-md-1" id="bb2"></div>
+    <div class="col-md-1" id="so2"></div>
+    <div class="col-md-1" id="rbi2"></div>
+    <div class="col-md-1" id="sb2"></div>
+    <div class="col-md-1" id="obp2"></div>
+    <div class="col-md-1" id="slg2"></div>
+    <div class="col-md-1" id="ops2"></div>
+    <div class="col-md-1" id="iso2"></div>
+  </div>
+</div>
+
+<!-- bootstrap function for tooltip -->
+<script type="text/javascript">
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+<!-- end bootstrap tooltip -->
+
+<!-- charts start here -->
+  <div style="width:30%">
+    <canvas id="canvas" height="450" width="450"></canvas>
+  </div>
+
+  <div style="width:30%">
+    <canvas id="canvas2" height="550" width="550"></canvas>
+  </div>
+
+  <div style="width: 50%">
+    <canvas id="canvas3" height="450" width="600"></canvas>
+  </div>
+
+
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"> </script>
+</body>
+</html>
