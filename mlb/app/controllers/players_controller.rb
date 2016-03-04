@@ -34,9 +34,10 @@ class PlayersController < ApplicationController
 
     #@players = Player.all(:order => 'position')
     player1 = Player.find_by({ age: params['age'], name: params['player1'] })
-    player1.age = player1.age.to_i
+    # player1.age = player1.age.to_i
     player2 = Player.find_by({ age: params['age'], name: params['player2'] })
-    player2.age = player2.age.to_i
+    # player2.age = player2.age.to_i
+
     render :json => [ player1, player2 ]
 end
 

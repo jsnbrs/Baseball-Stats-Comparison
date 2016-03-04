@@ -62,39 +62,122 @@ $(function(){
 
   } // makeChart
 
+//
+
+//
+
+function makeChart2(firstPlayer, secondPlayer){
+      var radarChartData = {
+    labels: ["AVERAGE", "OBP", "SLUGGING", "BASE + SLUGGING", "POWER"],
+    datasets: [
+      {
+        label: "Player One",
+        fillColor: "rgba(220,220,220,0.2)",
+        strokeColor: "rgba(220,220,220,1)",
+        pointColor: "rgba(220,220,220,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(220,220,220,1)",
+        data: [ firstPlayer.avg,
+                firstPlayer.obp,
+                firstPlayer.slg,
+                firstPlayer.ops,
+                firstPlayer.iso ]
+      },
+      {
+        label: "Player Two",
+        fillColor: "rgba(151,187,205,0.2)",
+        strokeColor: "rgba(151,187,205,1)",
+        pointColor: "rgba(151,187,205,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(151,187,205,1)",
+        data: [ secondPlayer.avg,
+                secondPlayer.obp,
+                secondPlayer.slg,
+                secondPlayer.ops,
+                secondPlayer.iso ]
+      }
+    ]}
+
+      window.myRadar = new Chart(document.getElementById("canvas2").getContext("2d")).Radar(radarChartData, {
+      responsive: true
+      });
+
+  } // makeChart2
+
+
+function makeChart3(firstPlayer, secondPlayer){
+  var barChartData = {
+    labels : ["Games Played", "At Bat", "Single", "Double", "Triple", "Stolen Base", "Hit By Pitch"],
+
+    datasets : [
+      {
+        fillColor : "rgba(220,220,220,0.5)",
+        strokeColor : "rgba(220,220,220,0.8)",
+        highlightFill: "rgba(220,220,220,0.75)",
+        highlightStroke: "rgba(220,220,220,1)",
+        data : [ firstPlayer.g,
+                firstPlayer.ab,
+                firstPlayer.single,
+                firstPlayer.double,
+                firstPlayer.triple,
+                firstPlayer.sb,
+                firstPlayer.hbp ]
+      },
+      {
+        fillColor : "rgba(151,187,205,0.5)",
+        strokeColor : "rgba(151,187,205,0.8)",
+        highlightFill : "rgba(151,187,205,0.75)",
+        highlightStroke : "rgba(151,187,205,1)",
+        data : [ secondPlayer.g,
+                secondPlayer.ab,
+                secondPlayer.single,
+                secondPlayer.double,
+                secondPlayer.triple,
+                secondPlayer.sb,
+                secondPlayer.hbp ]
+      }
+    ]
+  }
+
+    window.myBar = new Chart(document.getElementById("canvas3").getContext("2d")).Bar(barChartData, {
+      responsive: true
+      });
+  }// bar chart
+
 
   console.log('players.js loaded.')
-  $('form').click(function(event){
+  $('#searchbutton').click(function(event){
     // Issue here with form need to figure out click on button, not click on box
 
     console.log('click noticed.')
     event.preventDefault();
 
-    var action = $(this).attr('action');
+    var age = $('#age').val();
+    var player1 = $('#player1').val();
+    var player2 = $('#player2').val();
 
-    var age = $(this).find("#age").val();
-    var player1 = $(this).find("#player1").val();
-    var player2 = $(this).find("#player2").val();
-
+    // Conditional that age, player1, player 2 exist, ajax in conditional
     $.ajax({
     method: "get",
     url: "/players/" + age +"/" + player1 + "/" + player2,
     dataType: "JSON",
       success: function(data){
         $('.json').empty();
-
+        console.log(data)
         var player_1_div1 = $(`
-          <div class="json">${data[0].pa}</div>
-          `).appendTo( '#pa1' );
+          <div class="json">${data[0].name}</div>
+          `).appendTo( '#name1' );
         var player_1_div2 = $(`
-          <div class="json">${data[0].avg}</div>
-          `).appendTo( '#avg1' );
-        var player_1_div3 = $(`
-          <div class="json">${data[0].r}</div>
-          `).appendTo( '#r1' );
-        var player_1_div4 = $(`
           <div class="json">${data[0].hr}</div>
           `).appendTo( '#hr1' );
+        var player_1_div3 = $(`
+          <div class="json">${data[0].avg}</div>
+          `).appendTo( '#avg1' );
+        var player_1_div4 = $(`
+          <div class="json">${data[0].r}</div>
+          `).appendTo( '#r1' );
         var player_1_div5 = $(`
           <div class="json">${data[0].bb}</div>
           `).appendTo( '#bb1' );
@@ -121,17 +204,17 @@ $(function(){
           `).appendTo( '#iso1' );
 
         var player_2_div1 = $(`
-          <div class="json">${data[1].pa}</div>
-          `).appendTo( '#pa2' );
+          <div class="json">${data[1].name}</div>
+          `).appendTo( '#name2' );
         var player_2_div2 = $(`
-          <div class="json">${data[1].avg}</div>
-          `).appendTo( '#avg2' );
-        var player_2_div3 = $(`
-          <div class="json">${data[1].r}</div>
-          `).appendTo( '#r2' );
-        var player_2_div4 = $(`
           <div class="json">${data[1].hr}</div>
           `).appendTo( '#hr2' );
+        var player_2_div3 = $(`
+          <div class="json">${data[1].avg}</div>
+          `).appendTo( '#avg2' );
+        var player_2_div4 = $(`
+          <div class="json">${data[1].r}</div>
+          `).appendTo( '#r2' );
         var player_2_div5 = $(`
           <div class="json">${data[1].bb}</div>
           `).appendTo( '#bb2' );
@@ -160,7 +243,8 @@ $(function(){
 
         // Once this is the data you want, play with data, append data to DOM
         makeChart(data[0], data[1]);
-
+        makeChart2(data[0], data[1]);
+        makeChart3(data[0], data[1]);
 
         document.getElementById("form").reset();
         },
