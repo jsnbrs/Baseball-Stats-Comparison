@@ -1,6 +1,13 @@
 // @import "bootstrap-sprockets";
 @import "bootstrap";
 
+
+.col-md-1 {
+  text-align: center;
+  color: white;
+  background-color: #58736D;
+  height: 26px;
+}
 .col-md-4 {
   width: 33%;
   display: inline-block;
@@ -14,6 +21,3 @@
   vertical-align: middle;
 }
 
-body {
-
-}
