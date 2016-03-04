@@ -7,16 +7,22 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
+
 <body>
 
 <div class="container-fluid">
-  <div class="form-group" id="search">
+<!-- <div id="top">
+  <img src = "http://i.huffpost.com/gen/3112924/original.jpg">
+</div> -->
+  <div class="form-group">
     <div class="row">
       <div class="col-md-4"></div>
-      <div class="col-md-4"><h1>Player Comparison</h1></div>
+      <div class="col-md-4"><h1 class="title">MLB Player Comparison</h1></div>
       <div class="col-md-4"></div>
     </div>
+</div>
 
+  <div class="container-fluid">
       <%= form_tag(players_path, :method => "GET", id: "form") do %>
 
         <div class="buttons">
