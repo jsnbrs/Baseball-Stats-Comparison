@@ -62,10 +62,6 @@ $(function(){
 
   } // makeChart
 
-//
-
-//
-
 function makeChart2(firstPlayer, secondPlayer){
       var radarChartData = {
     labels: ["AVERAGE", "OBP", "SLUGGING", "BASE + SLUGGING", "POWER"],
@@ -159,6 +155,10 @@ function makeChart3(firstPlayer, secondPlayer){
     var player2 = $('#player2').val();
 
     // Conditional that age, player1, player 2 exist, ajax in conditional
+    if (age === '' || player1 === '' || player2 === '') {
+      $('#myModal').modal('show');
+    } else {
+
     $.ajax({
     method: "get",
     url: "/players/" + age +"/" + player1 + "/" + player2,
@@ -247,11 +247,15 @@ function makeChart3(firstPlayer, secondPlayer){
         makeChart3(data[0], data[1]);
 
         document.getElementById("form").reset();
+
+
         },
       error: function(data){
         console.log('error with the data...');
         },
     });
+
+};//ifelse
 
   });
 });
