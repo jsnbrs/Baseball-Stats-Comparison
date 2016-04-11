@@ -15,17 +15,16 @@
 
   <div class="form-group">
     <div class="row">
-      <div class="col-md-4"></div>
-      <div class="col-md-4"><h1 class="title">MLB Player Comparison</h1></div>
-      <div class="col-md-4"></div>
+      <h1 class="text-center title">MLB Player Comparison</h1>
     </div>
 </div>
 
-  <div class="container-fluid">
+  <div class="text-center">
+    <h4>Enter two players and the age at which you would like to compare their stats.</h4>
+    <h4>For example:  20, Bryce Harper, Mike Trout</h4>
+  </div>
 
-    <div class="center-block">
-      <p><strong>Enter two players and the age at which you would like to compare their stats.</strong></p>
-    </div>
+  <div class="container-fluid">
 
       <%= form_tag(players_path, :method => "GET", id: "form") do %>
 
