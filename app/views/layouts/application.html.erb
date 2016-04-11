@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
   <title>MLB Stat Comparison</title>
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -21,9 +22,11 @@
 </div>
 
   <div class="container-fluid">
+
     <div class="center-block">
       <p><strong>Enter two players and the age at which you would like to compare their stats.</strong></p>
     </div>
+
       <%= form_tag(players_path, :method => "GET", id: "form") do %>
 
         <div class="buttons">

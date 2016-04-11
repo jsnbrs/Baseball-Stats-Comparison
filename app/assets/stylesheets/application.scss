@@ -1,24 +1,22 @@
-// @import "bootstrap-sprockets";
+
 @import "bootstrap";
 
 .title {
   margin-top: 150px;
   text-shadow: 1px 1px #ff0000;
 }
-
 .center-block {
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
-
 .form-group {
 display: table;
 position: relative;
 width: 100%;
 height: 100%;
 opacity: .9;
-background: url("http://i.huffpost.com/gen/3112924/original.jpg") no-repeat center center scroll;
+background: url(../images/sunset1.jpg) no-repeat center center scroll;
 -webkit-background-size: cover;
 -moz-background-size: cover;
 background-size: cover;
@@ -26,7 +24,6 @@ background-size: cover;
 color: white;
 height: 500px;
 }
-
 .col-md-1 {
   text-align: center;
   color: white;
@@ -40,7 +37,6 @@ height: 500px;
   vertical-align: middle;
   line-height: 90px;
 }
-
 .buttons {
   text-align: center;
   vertical-align: middle;
